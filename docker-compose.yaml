@@ -6,6 +6,8 @@ services:
         volumes:
             - /usr/src/app/node_modules
             - ./client:/usr/src/app
+        ports: 
+            - 3000:80
         restart: always
         environment:
         - NODE_ENV=development
@@ -15,7 +17,7 @@ services:
         volumes:
             - ./server:/usr/src/app
         ports:
-            - 8004:8000
+            - 8000:80
         environment:
             - ENVIRONMENT=dev
         depends_on:
