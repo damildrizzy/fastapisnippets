@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 from pydantic import ValidationError
 
 from app.database import SessionLocal
-from app.models import User
+from app.models.user import User
 from app.security import SECRET_KEY, ALGORITHM
 from .schemas import TokenPayload
 from .crud import get_user
