@@ -20,7 +20,8 @@ services:
             - 8000:80
         environment:
             - ENVIRONMENT=dev
-            - DATABASE_URL=postgresql://dami:wildflower@localhost:5432/snippets
+            - DATABASE_URL=postgresql://dami:wildflower@db/snippets
+            - SECRET_KEY=notasecret
         depends_on:
             - db
     
@@ -29,9 +30,9 @@ services:
         volumes:
         - postgres_data:/var/lib/postgresql/data/
         environment:
-        - POSTGRES_USER=dami
-        - POSTGRES_PASSWORD=wildflower
-        - POSTGRES_DB=snippets
+         - POSTGRES_USER=dami
+         - POSTGRES_PASSWORD=wildflower
+         - POSTGRES_DB=snippets
     
 volumes:
     postgres_data:
