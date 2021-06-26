@@ -20,6 +20,7 @@ services:
             - 8000:80
         environment:
             - ENVIRONMENT=dev
+            - DATABASE_URL=postgresql://dami:wildflower@localhost:5432/snippets
         depends_on:
             - db
     
