@@ -1,6 +1,7 @@
 from app.database import Base
 from sqlalchemy import Column, String, Boolean, Integer
 
+
 class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     full_name = Column(String, index=True)
