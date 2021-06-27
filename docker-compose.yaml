@@ -35,7 +35,6 @@ services:
          - POSTGRES_DB=snippets
 
     pgadmin:
-        container_name: pgadmin
         image: dpage/pgadmin4
         environment:
         - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
