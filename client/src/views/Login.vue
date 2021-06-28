@@ -11,6 +11,7 @@
   >
     <div class="bg-white w-96 shadow-xl rounded p-5">
       <h1 class="text-3xl font-light">Welcome</h1>
+      <p class="text-sm">Sign in with your email and password</p>
 
       <form class="space-y-5 mt-5">
         <input
