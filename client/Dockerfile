@@ -1,4 +1,5 @@
 # build stage
+# todo - check mherman vue blog post on dcker
 FROM node:14-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
