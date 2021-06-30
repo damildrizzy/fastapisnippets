@@ -3,7 +3,6 @@ from datetime import timedelta
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from fastapi.security import OAuth2PasswordRequestForm
 
 from . import schemas, crud, deps
 from app.security import ACCESS_TOKEN_EXPIRE_MINUTES, create_access_token
@@ -12,10 +11,8 @@ router = APIRouter()
 
 
 @router.post("/access-token", response_model=schemas.Token)
-def login_access_token(
-    db: Session = Depends(deps.get_db), form_data: OAuth2PasswordRequestForm = Depends()
-) -> Any:
-    user = crud.authenticate(db, email=form_data.username, password=form_data.password)
+def login_access_token(user: schemas.UserAuth, db: Session = Depends(deps.get_db)) -> Any:
+    user = crud.authenticate(db, email=user.email, password=user.password)
     if not user:
         raise (HTTPException(status_code=400, detail="Incorrect Login Details"))
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
