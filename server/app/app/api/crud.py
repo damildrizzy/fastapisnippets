@@ -19,7 +19,7 @@ def get_users(db: Session):
     return db.query(User).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate) -> User:
+def create_user(db: Session, user: schemas.UserAuth) -> User:
     hashed_password = get_password_hash(user.password)
     db_user = User(email=user.email, hashed_password=hashed_password)
     db.add(db_user)
