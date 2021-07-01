@@ -13,26 +13,28 @@
       <h1 class="text-3xl font-light">Welcome</h1>
       <p class="text-sm">Sign in with your email and password</p>
 
-      <form
+      <Form
         @submit.prevent="handleLogin"
         :validation-schema="schema"
         class="space-y-5 mt-5"
       >
-        <input
+        <Field
           type="text"
           class="w-full h-12 border border-gray-800 rounded px-3"
           v-model="email"
           placeholder="Email"
         />
+        <ErrorMessage name="email" />
         <div
           class="w-full flex items-center border border-gray-800 rounded px-3"
         >
-          <input
+          <Field
             type="password"
             class="w-4/5 h-12"
             v-model="password"
             placeholder="password"
           />
+          <ErrorMessage name="password" />
           <span class="text-green-500 hover:bg-green-50 rounded-md px-3"
             >Show</span
           >
@@ -51,20 +53,28 @@
         >
           Sign In
         </button>
-      </form>
+      </Form>
     </div>
   </div>
 </template>
 
 <script>
+import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
   name: "Login",
-  components: {},
+  components: {
+    Field,
+    Form,
+    ErrorMessage,
+  },
   data() {
     const schema = yup.object().shape({
-      email: yup.string().required("required"),
+      email: yup
+        .string()
+        .required("required")
+        .email("Please Enter a Valid Email Address"),
       password: yup.string().required("required"),
     });
     return {
