@@ -9,6 +9,22 @@
       items-center
     "
   >
+    <div
+      v-if="message"
+      class="
+        bg-red-100
+        border border-red-400
+        text-red-700
+        px-4
+        py-3
+        rounded
+        relative
+      "
+      role="alert"
+    >
+      <strong class="font-bold">Error! </strong>
+      <span class="block sm:inline">{{ message }}</span>
+    </div>
     <div class="bg-white w-96 shadow-xl rounded p-5">
       <h1 class="text-3xl font-light">Welcome</h1>
       <p class="text-sm">Sign in with your email and password</p>
@@ -18,33 +34,30 @@
         :validation-schema="schema"
         class="space-y-5 mt-5"
       >
-        <Field
-          name="email"
-          type="text"
-          class="w-full h-12 border border-gray-800 rounded px-3"
-          placeholder="Email"
-        />
-        <ErrorMessage name="email" />
-        <div
-          class="w-full flex items-center border border-gray-800 rounded px-3"
-        >
+        <div>
+          <Field
+            name="email"
+            type="text"
+            class="w-full h-12 border border-gray-800 rounded px-3"
+            placeholder="Email"
+          />
+          <ErrorMessage name="email" class="text-red-500 float-left mb-2" />
+        </div>
+        <div>
           <Field
             name="password"
             type="password"
-            class="w-4/5 h-12"
+            class="w-full h-12 border border-gray-800 rounded px-3"
             placeholder="password"
           />
-          <ErrorMessage name="password" />
-          <span class="text-green-500 hover:bg-green-50 rounded-md px-3"
-            >Show</span
-          >
+          <ErrorMessage name="password" class="text-red-500 float-left mb-2" />
         </div>
 
         <button
           class="
             text-center
             w-full
-            bg-green-500
+            bg-green-700
             rounded-md
             text-white
             py-3
@@ -73,9 +86,9 @@ export default {
     const schema = yup.object().shape({
       email: yup
         .string()
-        .required("required")
-        .email("Please Enter a Valid Email Address"),
-      password: yup.string().min(8).required("Password is Required"),
+        .required("email is required")
+        .email("please enter a valid email address"),
+      password: yup.string().min(8).required("password is required"),
     });
     return {
       message: "",
