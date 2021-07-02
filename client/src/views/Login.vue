@@ -14,14 +14,14 @@
       <p class="text-sm">Sign in with your email and password</p>
 
       <Form
-        @submit.prevent="handleLogin"
+        @submit="handleLogin"
         :validation-schema="schema"
         class="space-y-5 mt-5"
       >
         <Field
+          name="email"
           type="text"
           class="w-full h-12 border border-gray-800 rounded px-3"
-          v-model="email"
           placeholder="Email"
         />
         <ErrorMessage name="email" />
@@ -29,9 +29,9 @@
           class="w-full flex items-center border border-gray-800 rounded px-3"
         >
           <Field
+            name="password"
             type="password"
             class="w-4/5 h-12"
-            v-model="password"
             placeholder="password"
           />
           <ErrorMessage name="password" />
@@ -75,28 +75,29 @@ export default {
         .string()
         .required("required")
         .email("Please Enter a Valid Email Address"),
-      password: yup.string().required("required"),
+      password: yup.string().min(8).required("Password is Required"),
     });
     return {
-      email: "",
-      password: "",
       message: "",
       schema,
     };
   },
   methods: {
-    handleLogin() {
-      this.$store
-        .dispatch("auth/login", { email: this.email, password: this.password })
-        .then(
-          () => {
-            console.log(this.$store.state.auth.user);
-          },
-          (error) => {
-            console.log(error);
-            this.message = error.toString();
-          }
-        );
+    handleLogin(user) {
+      this.$store.dispatch("auth/login", user).then(
+        () => {
+          console.log(this.$store.state.auth.user);
+        },
+        (error) => {
+          console.log(error.response.data.detail);
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString();
+        }
+      );
     },
   },
 };
