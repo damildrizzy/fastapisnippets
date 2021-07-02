@@ -16,7 +16,6 @@
         border border-red-400
         text-red-700
         px-4
-        py-3
         rounded
         relative
       "
@@ -41,7 +40,7 @@
             class="w-full h-12 border border-gray-800 rounded px-3"
             placeholder="Email"
           />
-          <ErrorMessage name="email" class="text-red-500 float-left mb-2" />
+          <ErrorMessage name="email" class="text-red-400 float-left mb-2" />
         </div>
         <div>
           <Field
@@ -50,7 +49,7 @@
             class="w-full h-12 border border-gray-800 rounded px-3"
             placeholder="password"
           />
-          <ErrorMessage name="password" class="text-red-500 float-left mb-2" />
+          <ErrorMessage name="password" class="text-red-400 float-left mb-2" />
         </div>
 
         <button

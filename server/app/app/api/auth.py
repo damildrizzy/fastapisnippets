@@ -18,8 +18,8 @@ def login_access_token(user: schemas.UserAuth, db: Session = Depends(deps.get_db
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
     return {
+        "token_type": "bearer",
         "access_token": create_access_token(
             data={"sub": user.email}, expires_delta=access_token_expires
         ),
-        "token_type": "bearer",
     }
