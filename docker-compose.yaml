@@ -24,19 +24,17 @@ services:
             - 8000:80
         environment:
             - ENVIRONMENT=dev
-            - DATABASE_URL=postgresql://dami:wildflower@db/snippets
+            - DATABASE_URL=postgresql://user:notasafepassword@db/snippets_db
             - SECRET_KEY=notasecret
         depends_on:
             - db
     
     db:
         image: postgres:12.0-alpine
-        volumes:
-        - postgres_data:/var/lib/postgresql/data/
         environment:
-         - POSTGRES_USER=dami
-         - POSTGRES_PASSWORD=wildflower
-         - POSTGRES_DB=snippets
+         - POSTGRES_USER=user
+         - POSTGRES_PASSWORD=notasafepassword
+         - POSTGRES_DB=snippets_db
 
     pgadmin:
         image: dpage/pgadmin4
@@ -49,6 +47,5 @@ services:
         - db
     
     
-volumes:
-    postgres_data:
+
     
