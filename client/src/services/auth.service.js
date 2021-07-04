@@ -19,6 +19,15 @@ class AuthService {
   logout() {
     localStorage.removeItem("user");
   }
+
+  register(user) {
+    return axios.post(`${API_URL}/users`, {
+      full_name: user.name,
+      username: user.username,
+      email: user.email,
+      password: user.password,
+    });
+  }
 }
 
 export default new AuthService();

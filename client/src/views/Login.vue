@@ -2,7 +2,7 @@
   <div
     class="
       h-screen
-      bg-white
+      bg-gray-200
       flex flex-col
       space-y-10
       justify-center
@@ -87,7 +87,7 @@ export default {
         .string()
         .required("email is required")
         .email("please enter a valid email address"),
-      password: yup.string().min(8).required("password is required"),
+      password: yup.string().min(6).required("password is required"),
     });
     return {
       message: "",
@@ -96,6 +96,8 @@ export default {
   },
   methods: {
     handleLogin(user) {
+      this.message = "";
+
       this.$store.dispatch("auth/login", user).then(
         () => {
           console.log(this.$store.state.auth.user);

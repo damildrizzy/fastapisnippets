@@ -22,6 +22,9 @@ export const auth = {
       state.status.loggedIn = false;
       state.user = null;
     },
+    registerSuccess(state) {
+      state.status.loggedIn = false;
+    },
   },
   actions: {
     login({ commit }, user) {
@@ -39,6 +42,12 @@ export const auth = {
     logout({ commit }) {
       AuthService.logout();
       commit("logout");
+    },
+    register({ commit }, user) {
+      return AuthService.register(user).then(({ data }) => {
+        commit("registerSuccess");
+        return Promise.resolve(data);
+      });
     },
   },
 };
