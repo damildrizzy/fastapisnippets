@@ -26,7 +26,7 @@
     </div>
     <div class="bg-white w-96 shadow-xl rounded p-5">
       <h1 class="text-3xl font-light">Welcome</h1>
-      <p class="text-sm">Sign in with your email and password</p>
+      <p class="text-sm">Sign in with your email or username</p>
 
       <Form
         @submit="handleLogin"
@@ -35,10 +35,10 @@
       >
         <div>
           <Field
-            name="email"
+            name="identifier"
             type="text"
             class="w-full h-12 border border-gray-800 rounded px-3"
-            placeholder="Email"
+            placeholder="Email Address or Username"
           />
           <ErrorMessage name="email" class="text-red-400 float-left mb-2" />
         </div>
@@ -83,10 +83,9 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      email: yup
+      identifier: yup
         .string()
-        .required("email is required")
-        .email("please enter a valid email address"),
+        .required("An email address or username is required"),
       password: yup.string().min(6).required("password is required"),
     });
     return {
