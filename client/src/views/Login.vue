@@ -2,9 +2,9 @@
   <div
     class="
       h-screen
-      bg-gray-200
+      bg-gray-700
       flex flex-col
-      space-y-10
+      space-y-3
       justify-center
       items-center
     "
@@ -66,6 +66,14 @@
           Sign In
         </button>
       </Form>
+    </div>
+    <div>
+      <p class="text-gray-300">
+        Don't have an account?
+        <span class="text-white">
+          <router-link to="/register">Create One</router-link>
+        </span>
+      </p>
     </div>
   </div>
 </template>

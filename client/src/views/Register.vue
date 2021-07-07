@@ -2,9 +2,9 @@
   <div
     class="
       h-screen
-      bg-green-900
+      bg-gray-700
       flex flex-col
-      space-y-10
+      space-y-3
       justify-center
       items-center
     "
@@ -182,6 +182,14 @@
           Create Account
         </button>
       </Form>
+    </div>
+    <div>
+      <p class="text-gray-300">
+        Already have an account?
+        <span class="text-white">
+          <router-link to="/login">Login</router-link>
+        </span>
+      </p>
     </div>
   </div>
 </template>
