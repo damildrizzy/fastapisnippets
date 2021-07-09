@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from . import schemas
+from app.schemas import auth
 from app.models.user import User
 from app.security import get_password_hash, verify_password
 
@@ -23,7 +23,7 @@ def get_users(db: Session):
     return db.query(User).all()
 
 
-def create_user(db: Session, user: schemas.UserCreate) -> User:
+def create_user(db: Session, user: auth.UserCreate) -> User:
     hashed_password = get_password_hash(user.password)
     db_user = User(email=user.email, username=user.username, full_name=user.full_name, hashed_password=hashed_password)
     db.add(db_user)
