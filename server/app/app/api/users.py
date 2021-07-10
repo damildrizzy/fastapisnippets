@@ -3,7 +3,7 @@ from fastapi.routing import APIRouter
 from sqlalchemy.orm import Session
 from typing import List
 
-from ..crud.user import create_user, get_user_by_email, get_users, get_user
+from ..crud.user import create, get_user_by_email, get_users, get_user
 from ..schemas import auth
 from .deps import get_db
 
@@ -15,7 +15,7 @@ def create_user(user: auth.UserCreate, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
-    return create_user(db=db, user=user)
+    return create(db=db, user=user)
 
 
 @router.get("/", response_model=List[auth.User])

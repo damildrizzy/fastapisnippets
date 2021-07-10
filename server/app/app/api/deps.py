@@ -7,8 +7,8 @@ from pydantic import ValidationError
 from app.database import SessionLocal
 from app.models.user import User
 from app.security import SECRET_KEY, ALGORITHM
-from .schemas import TokenPayload
-from .crud import get_user
+from app.schemas.auth import TokenPayload
+from app.crud.user import get_user
 
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="auth/access-token")
