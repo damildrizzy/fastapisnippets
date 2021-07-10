@@ -20,4 +20,4 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(users.router, prefix="/users", tags=["users"])
-app.include_router(snippet.router, prefix="/snippets", tags=["snippet"])
+app.include_router(snippet.router, prefix="/snippets", tags=["snippet_in"])

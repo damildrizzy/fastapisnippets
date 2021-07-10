@@ -4,9 +4,10 @@ from sqlalchemy.orm import Session
 
 from typing import List
 
-from .deps import get_db
+from .deps import get_db, get_current_user
 from ..schemas import snippet
-from ..crud.snippet import get_snippets, get_snippet, create_snippet
+from ..models.user import User
+from ..crud.snippet import get_snippets, get_snippet, create
 
 router = APIRouter()
 
@@ -26,5 +27,7 @@ def read_snippet(snippet_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("/", response_model=snippet.Snippet)
-def create_snippet(snippet: snippet.SnippetCreate, db: Session = Depends(get_db)):
-    return create_snippet(db, snippet=snippet)
+def create_snippet(snippet_in: snippet.SnippetCreate,
+                   db: Session = Depends(get_db),
+                   current_user: User = Depends(get_current_user)) :
+    return create(db, snippet=snippet_in, user_id=current_user.id)

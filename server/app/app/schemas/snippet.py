@@ -17,7 +17,7 @@ class Snippet(SnippetBase):
     id: int
     author_id: int
     author: User
-    created_at: datetime
+    pub_date: datetime
     updated_at: datetime = None
 
     class Config:

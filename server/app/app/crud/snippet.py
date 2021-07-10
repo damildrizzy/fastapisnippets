@@ -11,8 +11,8 @@ def get_snippets(db: Session):
     return db.query(Snippet).all()
 
 
-def create_snippet(db: Session, snippet: SnippetCreate, user_id: int):
-    db_snippet = Snippet(**Snippet.dict(), author_id=user_id)
+def create(db: Session, snippet: SnippetCreate, user_id: int):
+    db_snippet = Snippet(**snippet.dict(), author_id=user_id)
     db.add(db_snippet)
     db.commit()
     db.refresh(db_snippet)

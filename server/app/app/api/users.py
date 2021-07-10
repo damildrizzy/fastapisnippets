@@ -24,7 +24,7 @@ def list_users(db: Session = Depends(get_db)):
     return users
 
 
-@router.get("/users/{user_id}", response_model=auth.User)
+@router.get("/{user_id}", response_model=auth.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = get_user(db, user_id=user_id)
     if db_user is None:
