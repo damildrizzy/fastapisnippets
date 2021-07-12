@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-between">
-    <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Snippets</h1>
+    <h1 class="text-xl font-bold text-gray-700 md:text-2xl">All Snippets</h1>
     <div>
       <select
         class="
@@ -30,23 +30,7 @@
     </div>
   </div>
   <div class="mt-6">
-    <div class="max-w-4xl px-10 py-6 mx-auto bg-white rounded-lg shadow-md">
-      <div class="flex items-center justify-between">
-        <span class="font-light text-gray-600">Jun 1, 2020</span
-        ><a
-          href="#"
-          class="
-            px-2
-            py-1
-            font-bold
-            text-gray-100
-            bg-gray-600
-            rounded
-            hover:bg-gray-500
-          "
-          >Laravel</a
-        >
-      </div>
+    <div class="max-w-4xl px-5 py-1 mx-auto bg-white shadow-md">
       <div class="mt-2">
         <a href="#" class="text-2xl font-bold text-gray-700 hover:underline"
           >Build Your New Idea with Laravel Freamwork.</a
@@ -56,7 +40,7 @@
           expedita dicta totam aspernatur doloremque. Excepturi iste iusto
         </p>
       </div>
-      <div class="flex items-center justify-between mt-4">
+      <div class="flex items-center justify-between mt-2">
         <a href="#" class="text-blue-500 hover:underline">Read more</a>
         <div>
           <a href="#" class="flex items-center"
