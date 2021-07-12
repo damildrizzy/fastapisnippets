@@ -29,16 +29,13 @@
       </select>
     </div>
   </div>
-  <div class="mt-6">
+  <div v-for="snippet in snippets" :key="snippet.id" class="mt-6">
     <div class="max-w-4xl px-5 py-1 mx-auto bg-white shadow-md">
       <div class="mt-2">
-        <a href="#" class="text-2xl font-bold text-gray-700 hover:underline"
-          >Build Your New Idea with Laravel Freamwork.</a
-        >
-        <p class="mt-2 text-gray-600">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora
-          expedita dicta totam aspernatur doloremque. Excepturi iste iusto
-        </p>
+        <a href="#" class="text-2xl font-bold text-gray-700 hover:underline">{{
+          snippet.title
+        }}</a>
+        <p class="mt-2 text-gray-600">{{ snippet.description }}</p>
       </div>
       <div class="flex items-center justify-between mt-2">
         <a href="#" class="text-blue-500 hover:underline">Read more</a>
@@ -49,7 +46,9 @@
               alt="avatar"
               class="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"
             />
-            <h1 class="font-bold text-gray-700 hover:underline">Alex John</h1>
+            <h1 class="font-bold text-gray-700 hover:underline">
+              {{ snippet.author.full_name }}
+            </h1>
           </a>
         </div>
       </div>
@@ -58,7 +57,29 @@
 </template>
 
 <script>
+import SnippetService from "../services/snippet.service";
 export default {
   name: "SnippetList",
+  data() {
+    return {
+      snippets: [],
+      message: "",
+    };
+  },
+  mounted() {
+    SnippetService.getSnippets().then(
+      (response) => {
+        this.snippets = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
+  },
 };
 </script>
