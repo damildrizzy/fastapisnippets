@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from ..models.snippet import Snippet
 from ..schemas.snippet import SnippetCreate
+
+from app.models.user import User
 
 
 def get_snippet(db: Session, snippet_id: int) -> Snippet:
@@ -9,6 +12,10 @@ def get_snippet(db: Session, snippet_id: int) -> Snippet:
 
 def get_snippets(db: Session):
     return db.query(Snippet).all()
+
+
+def get_top_authors(db: Session):
+    return db.query(User, func.count(User.snippets).label("count")).all()
 
 
 def create(db: Session, snippet: SnippetCreate, user_id: int):
