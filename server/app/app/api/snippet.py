@@ -14,13 +14,13 @@ router = APIRouter()
 
 @router.get("/", response_model=List[schemas.Snippet])
 def list_snippets(db: Session = Depends(get_db)):
-    snippets = crud.get_snippets(db)
+    snippets = crud.read_snippets(db)
     return snippets
 
 
 @router.get("/{snippet_id}", response_model=schemas.Snippet)
-def read_snippet(snippet_id: int, db: Session = Depends(get_db)):
-    db_snippet = crud.get_snippet(db, snippet_id=snippet_id)
+def get_snippet(snippet_id: int, db: Session = Depends(get_db)):
+    db_snippet = crud.read_snippet(db, snippet_id=snippet_id)
     if db_snippet is None:
         raise HTTPException(status_code=404, detail="Snippet not found")
     return db_snippet
