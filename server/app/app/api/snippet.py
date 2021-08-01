@@ -18,6 +18,11 @@ def list_snippets(db: Session = Depends(get_db)):
     return snippets
 
 
+@router.get("/top-authors", response_model=List[schemas.TopAuthors])
+def top_authors(db: Session = Depends(get_db)):
+    return crud.read_top_authors(db)
+
+
 @router.get("/{snippet_id}", response_model=schemas.Snippet)
 def get_snippet(snippet_id: int, db: Session = Depends(get_db)):
     db_snippet = crud.read_snippet(db, snippet_id=snippet_id)
@@ -28,6 +33,8 @@ def get_snippet(snippet_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=schemas.Snippet)
 def create_snippet(
+        snippet: schemas.SnippetCreate,
         db: Session = Depends(get_db),
         current_user: models.User = Depends(get_current_user)):
-    return crud.create_user(db, user=current_user.id)
+    return crud.create_snippet(db, snippet, user_id=current_user.id)
+

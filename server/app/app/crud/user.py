@@ -15,7 +15,8 @@ def get_user_by_email(db: Session, email: str) -> models.User:
 
 
 def get_user_by_identifier(db: Session, identifier: str) -> models.User:
-    return db.query(models.User).filter((models.User.email == identifier) | (models.User.username == identifier)).first()
+    return db.query(models.User).filter(
+        (models.User.email == identifier) | (models.User.username == identifier)).first()
 
 
 def get_users(db: Session):

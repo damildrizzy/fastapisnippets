@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-
 from app import models, schemas
 
 
@@ -12,13 +11,22 @@ def read_snippets(db: Session):
     return db.query(models.Snippet).all()
 
 
-def read_top_authors(db: Session):
-    return db.query(models.User, func.count(models.User.snippets).label("count")).all()
-
-
 def create_snippet(db: Session, snippet: schemas.SnippetCreate, user_id: int):
     db_snippet = models.Snippet(**snippet.dict(), author_id=user_id)
     db.add(db_snippet)
     db.commit()
     db.refresh(db_snippet)
     return db_snippet
+
+
+def read_top_authors(db: Session):
+    snippets = db.query(models.Snippet.author_id, func.count('*').label("count")). \
+        group_by(models.Snippet.author_id).subquery()
+
+    query = db.query(models.User, snippets.c.count). \
+        outerjoin(snippets, models.User.id == snippets.c.author_id). \
+        order_by(snippets.c.count.desc()).limit(5)
+
+    for obj, count in query:
+        obj.count = count
+        yield obj

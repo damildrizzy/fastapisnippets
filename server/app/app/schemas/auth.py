@@ -31,7 +31,3 @@ class Token(BaseModel):
 
 class TokenPayload(BaseModel):
     sub: Optional[str] = None
-
-
-class TongueBase(BaseModel):
-    raw_string: str

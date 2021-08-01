@@ -22,3 +22,11 @@ class Snippet(SnippetBase):
 
     class Config:
         orm_mode = True
+
+
+class TopAuthors(BaseModel):
+    full_name: str
+    count: int
+
+    class Config:
+        orm_mode = True
