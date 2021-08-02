@@ -19,13 +19,14 @@ services:
     server: 
         build: ./server
         volumes:
-            - ./server:/usr/src/app
+            - ./server/app:/app
         ports:
             - 8000:80
         environment:
             - ENVIRONMENT=dev
             - DATABASE_URL=postgresql://user:notasafepassword@db/snippets_db
             - SECRET_KEY=notasecret
+        command: /start-reload.sh
         depends_on:
             - db
     
