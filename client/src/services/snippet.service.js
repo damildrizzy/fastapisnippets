@@ -6,6 +6,10 @@ class SnippetService {
   getSnippets() {
     return axios.get(API_URL);
   }
+
+  getTopAuthors() {
+    return axios.get(`${API_URL}/top-authors`);
+  }
 }
 
 export default new SnippetService();
