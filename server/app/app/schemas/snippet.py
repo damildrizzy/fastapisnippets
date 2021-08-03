@@ -25,6 +25,7 @@ class Snippet(SnippetBase):
 
 
 class TopAuthors(BaseModel):
+    id: int
     full_name: str
     count: int
 
