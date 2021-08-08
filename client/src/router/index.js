@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
+import SnippetCreate from "@/views/SnippetCreate";
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
+  },
+  {
+    path: "/create",
+    name: "SnippetCreate",
+    component: SnippetCreate,
   },
 ];
 
