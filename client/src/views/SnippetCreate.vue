@@ -1,14 +1,89 @@
 <template>
-  <prism-editor
-    class="my-editor"
-    v-model="code"
-    :highlight="highlighter"
-    line-numbers
-  ></prism-editor>
+  <div class="px-6 py-8 bg-gray-100">
+    <div class="lg:w-9/12">
+      <div class="flex items-center justify-between">
+    <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post A Snippet</h1>
+    </div>
+    <div class="bg-white rounded p-5 mt-6">
+      <Form class="w-full mt-5">
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <label
+              class="
+                block
+                uppercase
+                tracking-wide
+                float-left
+                text-gray-700 text-xs
+                font-bold
+                mb-2
+              "
+              for="grid-title"
+            >
+              Title
+            </label>
+            <Field
+              name="title"
+              class="
+                appearance-none
+                block
+                w-full
+                text-gray-700
+                border border-gray-200
+                rounded
+                py-3
+                px-4
+                mb-3
+                leading-tight
+                focus:outline-none focus:bg-white focus:border-gray-500
+              "
+              id="grid-title"
+              type="text"
+            ></Field>
+          </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+          <div class="w-full px-3">
+            <div>
+                <label
+                class="
+                  block
+                  uppercase
+                  tracking-wide
+                  text-gray-700 text-xs
+                  font-bold
+                  mb-2
+                "
+                for="grid-description"
+              >
+                Description
+              </label>
+            </div>
+           <vue-editor v-model="description" id="grid-description"></vue-editor>  
+          </div>
+        </div>
+        
+        <div>
+          <prism-editor
+          class="my-editor overflow-auto h-96"
+          v-model="code"
+          :highlight="highlighter"
+          line-numbers>
+        </prism-editor>
+        </div>
+        
+      </Form>
+      
+    </div>
+    </div>
+    
+  </div>
 </template>
 
 <script>
+import { Form, Field } from "vee-validate";
 import { PrismEditor } from "vue-prism-editor";
+import { VueEditor } from "vue3-editor";
 import "vue-prism-editor/dist/prismeditor.min.css"; // import the styles somewhere
 
 // import highlighting library (you can use any library you want just return html string)
@@ -22,15 +97,19 @@ export default {
   name: "SnippetCreate",
   components: {
     PrismEditor,
+    VueEditor,
+    Field,
+    Form,
   },
   data() {
     return {
-      code: 'print("Hello World")',
+      code: "# code snippet goes here",
+      description: ""
     };
   },
   methods: {
     highlighter() {
-      return highlight(this.code, languages.py);
+      return highlight(this.code, languages.python);
     },
   },
 };
