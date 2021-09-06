@@ -17,6 +17,7 @@
     "vue-prism-component": "^2.0.0",
     "vue-prism-editor": "^2.0.0-alpha.2",
     "vue-router": "^4.0.0-0",
+    "vue3-editor": "0.1.0-alpha.3",
     "vuex": "^4.0.0-0",
     "yup": "^0.32.9"
   },
