@@ -7,25 +7,26 @@
         </h1>
       </div>
       <div class="bg-white rounded p-5 mt-6">
-        <Form class="w-full mt-5">
+        <Form @submit="handleCreate" class="w-full mt-5">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
-              <label
-                class="
-                  block
-                  uppercase
-                  tracking-wide
-                  float-left
-                  text-gray-700 text-xs
-                  font-bold
-                  mb-2
-                "
-                for="grid-title"
-              >
-                Title
-              </label>
+              <!--              <label-->
+              <!--                class="-->
+              <!--                  block-->
+              <!--                  uppercase-->
+              <!--                  tracking-wide-->
+              <!--                  float-left-->
+              <!--                  text-gray-700 text-xs-->
+              <!--                  font-bold-->
+              <!--                  mb-2-->
+              <!--                "-->
+              <!--                for="grid-title"-->
+              <!--              >-->
+              <!--                Title-->
+              <!--              </label>-->
               <Field
                 name="title"
+                :rules="isRequired"
                 class="
                   appearance-none
                   block
@@ -40,61 +41,35 @@
                   focus:outline-none focus:bg-white focus:border-gray-500
                 "
                 id="grid-title"
+                placeholder="Title"
                 type="text"
               ></Field>
+              <ErrorMessage class="text-red-500" name="title" />
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
               <div>
-                <label
-                  class="
-                    block
-                    uppercase
-                    tracking-wide
-                    text-gray-700 text-xs
-                    font-bold
-                    mb-2
-                  "
-                  for="grid-description"
-                >
-                  Description
-                </label>
+                <!--                <label-->
+                <!--                  class="-->
+                <!--                    block-->
+                <!--                    uppercase-->
+                <!--                    tracking-wide-->
+                <!--                    text-gray-700 text-xs-->
+                <!--                    font-bold-->
+                <!--                    mb-2-->
+                <!--                  "-->
+                <!--                  for="grid-description"-->
+                <!--                >-->
+                <!--                  Description-->
+                <!--                </label>-->
               </div>
-              <vue-editor
-                v-model="description"
-                id="grid-description"
-              ></vue-editor>
-            </div>
-          </div>
-          <div class="mb-6">
-            <prism-editor
-              class="my-editor overflow-auto h-96"
-              v-model="code"
-              :highlight="highlighter"
-              line-numbers
-            >
-            </prism-editor>
-          </div>
-          <div class="flex flex-wrap -mx-3">
-            <div class="w-full px-3">
-              <label
-                class="
-                  block
-                  uppercase
-                  tracking-wide
-                  float-left
-                  text-gray-700 text-xs
-                  font-bold
-                  mb-2
-                "
-                for="grid-tags"
-              >
-                Tags
-              </label>
               <Field
-                name="tags"
+                as="textarea"
+                name="description"
+                id="grid-description"
                 class="
+                  form-textarea
                   appearance-none
                   block
                   w-full
@@ -107,36 +82,92 @@
                   leading-tight
                   focus:outline-none focus:bg-white focus:border-gray-500
                 "
-                id="grid-tags"
-                type="text"
+                rows="5"
+                placeholder="Description."
+                :rules="isRequired"
               ></Field>
+              <ErrorMessage class="text-red-500" name="description" />
             </div>
           </div>
+          <div class="mb-6">
+            <Field
+              v-model="code"
+              name="code"
+              v-slot="{ editor }"
+              :rules="isRequired"
+            >
+              <prism-editor
+                class="my-editor overflow-auto h-96"
+                v-bind="editor"
+                :highlight="highlighter"
+                line-numbers
+              >
+              </prism-editor>
+            </Field>
+            <ErrorMessage class="text-red-500" name="code" />
+          </div>
+          <div class="flex flex-wrap -mx-3">
+            <div class="w-full px-3">
+              <!--              <label-->
+              <!--                class="-->
+              <!--                  block-->
+              <!--                  uppercase-->
+              <!--                  tracking-wide-->
+              <!--                  float-left-->
+              <!--                  text-gray-700 text-xs-->
+              <!--                  font-bold-->
+              <!--                  mb-2-->
+              <!--                "-->
+              <!--                for="grid-tags"-->
+              <!--              >-->
+              <!--                Tags-->
+              <!--              </label>-->
+
+              <div id="grid-tags" class="tag-input">
+                <div
+                  v-for="(tag, index) in tags"
+                  :key="tag"
+                  class="tag-input__tag"
+                >
+                  <span @click="removeTag(index)">x</span>
+                  {{ tag }}
+                </div>
+                <input
+                  name="tags"
+                  type="text"
+                  placeholder="Enter a tag"
+                  class="tag-input__text"
+                  @keyup.enter="addTag"
+                  @keyup.space="addTag"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            class="
+              bg-green-500
+              hover:bg-green-700
+              text-white
+              font-bold
+              mt-6
+              py-2
+              px-4
+              rounded
+            "
+          >
+            Post Snippet
+          </button>
         </Form>
       </div>
     </div>
-    <button
-      class="
-        bg-green-500
-        hover:bg-green-700
-        text-white
-        font-bold
-        mt-6
-        py-2
-        px-4
-        rounded
-      "
-    >
-      Post Snippet
-    </button>
   </div>
 </template>
 
 <script>
-import { Form, Field } from "vee-validate";
+import { Form, Field, ErrorMessage } from "vee-validate";
 import { PrismEditor } from "vue-prism-editor";
-import { VueEditor } from "vue3-editor";
-import "vue-prism-editor/dist/prismeditor.min.css"; // import the styles somewhere
+import "vue-prism-editor/dist/prismeditor.min.css";
+import SnippetService from "../services/snippet.service";
 
 // import highlighting library (you can use any library you want just return html string)
 import { highlight, languages } from "prismjs/components/prism-core";
@@ -149,19 +180,47 @@ export default {
   name: "SnippetCreate",
   components: {
     PrismEditor,
-    VueEditor,
     Field,
     Form,
+    ErrorMessage,
   },
   data() {
     return {
       code: "# code snippet goes here",
-      description: "",
+      tags: [],
     };
   },
   methods: {
+    addTag(event) {
+      event.preventDefault();
+      const val = event.target.value.trim();
+      if (val.length > 0) {
+        this.tags.push(val);
+        event.target.value = "";
+      }
+    },
+
+    isRequired(value) {
+      return value ? true : "*This field is required";
+    },
+
+    handleCreate: function (snippet) {
+      SnippetService.createSnippet(snippet).then(
+        (response) => {
+          console.log(response.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
     highlighter() {
       return highlight(this.code, languages.python);
+    },
+
+    removeTag(index) {
+      this.tags.splice(index, 1);
     },
   },
 };
@@ -179,5 +238,38 @@ export default {
   font-size: 14px;
   line-height: 1.5;
   padding: 5px;
+}
+
+.tag-input {
+  width: 100%;
+  border: 1px solid #eee;
+  font-size: 0.9em;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.tag-input__tag {
+  height: 30px;
+  float: left;
+  margin-right: 10px;
+  background-color: #eee;
+  margin-top: 10px;
+  line-height: 30px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+
+.tag-input__tag > span {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.tag-input__text {
+  border: none;
+  outline: none;
+  font-size: 0.9em;
+  line-height: 50px;
+  background: none;
 }
 </style>
