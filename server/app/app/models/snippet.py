@@ -5,9 +5,9 @@ from app.database import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Table
 from sqlalchemy.orm import relationship
 
-snippet_tag_relation = Table('snippet_tag', Base.metadata,
-                             Column('snippet_id', ForeignKey('snippet.id'), primary_key=True),
-                             Column('tag_id', ForeignKey('tag.id'), primary_key=True)
+snippet_tag_relation = Table('snippet_tag_relation', Base.metadata,
+                             Column('snippet_id', ForeignKey('snippets.id'), primary_key=True),
+                             Column('tag_id', ForeignKey('tags.id'), primary_key=True)
                              )
 
 
