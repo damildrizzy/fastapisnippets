@@ -2,8 +2,13 @@ import datetime
 from typing import TYPE_CHECKING
 
 from app.database import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Table
 from sqlalchemy.orm import relationship
+
+snippet_tag_relation = Table('snippet_tag', Base.metadata,
+                             Column('snippet_id', ForeignKey('snippet.id'), primary_key=True),
+                             Column('tag_id', ForeignKey('tag.id'), primary_key=True)
+                             )
 
 
 class Snippet(Base):
@@ -17,3 +22,12 @@ class Snippet(Base):
     author = relationship("User", back_populates="snippets")
     pub_date = Column(DateTime, default=datetime.datetime.utcnow)
     updated_date = Column(DateTime)
+    tags = relationship("Tag", secondary="snippet_tag_relation", back_populates="snippets")
+
+
+class Tag(Base):
+    __tablename__ = "tags"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    snippets = relationship("Snippet", secondary="snippet_tag_relation", back_populates="tags")
