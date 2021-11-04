@@ -90,20 +90,14 @@
             </div>
           </div>
           <div class="mb-6">
-            <Field
+            <prism-editor
               v-model="code"
-              name="code"
-              v-slot="{ editor }"
-              :rules="isRequired"
+              class="my-editor overflow-auto h-96"
+              :highlight="highlighter"
+              line-numbers
             >
-              <prism-editor
-                class="my-editor overflow-auto h-96"
-                v-bind="editor"
-                :highlight="highlighter"
-                line-numbers
-              >
-              </prism-editor>
-            </Field>
+            </prism-editor>
+
             <ErrorMessage class="text-red-500" name="code" />
           </div>
           <div class="flex flex-wrap -mx-3">
@@ -204,7 +198,13 @@ export default {
       return value ? true : "*This field is required";
     },
 
-    handleCreate: function (snippet) {
+    handleCreate: function (formData) {
+      const data = {
+        code: this.code,
+        tags: this.tags,
+      };
+      const snippet = JSON.parse(JSON.stringify({ ...formData, ...data }));
+
       SnippetService.createSnippet(snippet).then(
         (response) => {
           console.log(response.data);
