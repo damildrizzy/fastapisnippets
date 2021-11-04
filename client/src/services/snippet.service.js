@@ -13,6 +13,7 @@ class SnippetService {
       title: snippet.title,
       description: snippet.description,
       code: snippet.code,
+      tags: snippet.tags,
     };
 
     return axios.post(API_URL, data, { headers: authHeader() });
