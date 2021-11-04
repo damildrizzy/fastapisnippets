@@ -12,7 +12,14 @@ def read_snippets(db: Session):
 
 
 def create_snippet(db: Session, snippet: schemas.SnippetCreate, user_id: int):
-    db_snippet = models.Snippet(**snippet.dict(), author_id=user_id)
+    db_snippet = models.Snippet(title=snippet.title, description=snippet.description,
+                                code=snippet.code, author_id=user_id)
+
+    for tag in snippet.tags:
+        db_tag = models.Tag(name=tag)
+        print(db_tag)
+        db_snippet.tags.append(db_tag)
+
     db.add(db_snippet)
     db.commit()
     db.refresh(db_snippet)

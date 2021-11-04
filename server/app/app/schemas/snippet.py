@@ -1,7 +1,14 @@
 from datetime import datetime
 from pydantic import BaseModel
 from .auth import User
-from typing import List
+from typing import List, Set
+
+
+class Tag(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
 
 
 class SnippetBase(BaseModel):
@@ -11,7 +18,7 @@ class SnippetBase(BaseModel):
 
 
 class SnippetCreate(SnippetBase):
-    pass
+    tags: Set[str] = set()
 
 
 class Snippet(SnippetBase):
@@ -20,7 +27,7 @@ class Snippet(SnippetBase):
     author: User
     pub_date: datetime
     updated_at: datetime = None
-    tags: List[str]
+    tags: List[Tag] = []
 
     class Config:
         orm_mode = True
