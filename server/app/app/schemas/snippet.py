@@ -23,7 +23,6 @@ class SnippetCreate(SnippetBase):
 
 class Snippet(SnippetBase):
     id: int
-    author_id: int
     author: User
     pub_date: datetime
     updated_at: datetime = None
