@@ -17,7 +17,6 @@ def create_snippet(db: Session, snippet: schemas.SnippetCreate, user_id: int):
 
     for tag in snippet.tags:
         db_tag = models.Tag(name=tag)
-        print(db_tag)
         db_snippet.tags.append(db_tag)
 
     db.add(db_snippet)
