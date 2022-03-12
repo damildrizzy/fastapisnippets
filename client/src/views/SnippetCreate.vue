@@ -1,6 +1,6 @@
 <template>
-  <div class="px-6 py-8 bg-gray-100">
-    <div class="lg:w-9/12">
+  <div class="px-6 py-8 bg-gray-100 flex flex-col justify-center items-center">
+    <div class="lg:w-10/12">
       <div class="flex items-center justify-between">
         <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
           Post A Snippet
