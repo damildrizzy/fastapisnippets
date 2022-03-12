@@ -38,7 +38,11 @@
         <p class="mt-2 text-gray-600">{{ snippet.description }}</p>
       </div>
       <div class="flex items-center justify-between mt-2">
-        <a href="#" class="text-blue-500 hover:underline">Read more</a>
+        <router-link
+          :to="{ name: 'snippet-detail', params: { id: snippet.id } }"
+          class="text-blue-500 hover:underline"
+          >Read more</router-link
+        >
         <div>
           <a href="#" class="flex items-center"
             ><img
