@@ -12,6 +12,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.15.2",
     "prismjs": "^1.24.1",
+    "random-words": "^1.1.2",
     "vee-validate": "^4.4.5",
     "vue": "^3.0.0",
     "vue-prism-component": "^2.0.0",
