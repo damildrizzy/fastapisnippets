@@ -8,6 +8,10 @@ class SnippetService {
     return axios.get(API_URL);
   }
 
+  getSnippet(id) {
+    return axios.get(`${API_URL}/${id}`);
+  }
+
   createSnippet(snippet) {
     const data = {
       title: snippet.title,
