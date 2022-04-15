@@ -1,6 +1,6 @@
 <template>
   <div
-    class="
+      class="
       h-screen
       bg-gray-700
       flex flex-col
@@ -12,14 +12,14 @@
     <div class="bg-white rounded p-5">
       <h4 class="text-2l font-light">Create Your Account</h4>
       <Form
-        @submit="handleRegister"
-        :validation-schema="schema"
-        class="w-full max-w-lg mt-5"
+          :validation-schema="schema"
+          class="w-full max-w-lg mt-5"
+          @submit="handleRegister"
       >
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="
+                class="
                 block
                 uppercase
                 tracking-wide
@@ -28,13 +28,13 @@
                 font-bold
                 mb-2
               "
-              for="grid-name"
+                for="grid-name"
             >
               Name
             </label>
             <Field
-              name="name"
-              class="
+                id="grid-name"
+                class="
                 appearance-none
                 block
                 w-full
@@ -48,16 +48,16 @@
                 leading-tight
                 focus:outline-none focus:bg-white focus:border-gray-500
               "
-              id="grid-name"
-              type="text"
-              placeholder="Jane Doe"
+                name="name"
+                placeholder="Jane Doe"
+                type="text"
             ></Field>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="
+                class="
                 block
                 uppercase
                 tracking-wide
@@ -66,13 +66,13 @@
                 font-bold
                 mb-2
               "
-              for="grid-username"
+                for="grid-username"
             >
               Username
             </label>
             <Field
-              name="username"
-              class="
+                id="grid-username"
+                class="
                 appearance-none
                 block
                 w-full
@@ -86,16 +86,16 @@
                 leading-tight
                 focus:outline-none focus:bg-white focus:border-gray-500
               "
-              id="grid-username"
-              type="text"
-              placeholder="username"
+                name="username"
+                placeholder="username"
+                type="text"
             ></Field>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="
+                class="
                 block
                 uppercase
                 tracking-wide
@@ -104,13 +104,13 @@
                 font-bold
                 mb-2
               "
-              for="grid-email"
+                for="grid-email"
             >
               Email Address
             </label>
             <Field
-              name="email"
-              class="
+                id="grid-email"
+                class="
                 appearance-none
                 block
                 w-full
@@ -124,16 +124,16 @@
                 leading-tight
                 focus:outline-none focus:bg-white focus:border-gray-500
               "
-              id="grid-email"
-              type="text"
-              placeholder="janedoe@gmail.com"
+                name="email"
+                placeholder="janedoe@gmail.com"
+                type="text"
             ></Field>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="
+                class="
                 block
                 uppercase
                 tracking-wide
@@ -142,13 +142,13 @@
                 font-bold
                 mb-2
               "
-              for="grid-password"
+                for="grid-password"
             >
               Password
             </label>
             <Field
-              name="password"
-              class="
+                id="grid-password"
+                class="
                 appearance-none
                 block
                 w-full
@@ -162,14 +162,14 @@
                 leading-tight
                 focus:outline-none focus:bg-white focus:border-gray-500
               "
-              id="grid-password"
-              type="password"
-              placeholder="************"
+                name="password"
+                placeholder="************"
+                type="password"
             ></Field>
           </div>
         </div>
         <button
-          class="
+            class="
             text-center
             w-full
             bg-green-400
@@ -194,7 +194,7 @@
   </div>
 </template>
 <script>
-import { Form, Field } from "vee-validate";
+import {Form, Field} from "vee-validate";
 import * as yup from "yup";
 
 export default {
@@ -207,20 +207,20 @@ export default {
     const schema = yup.object().shape({
       name: yup.string().required("Name is required"),
       username: yup
-        .string()
-        .required("Username is required!")
-        .min(3, "Must be at least 3 characters!")
-        .max(20, "Must be maximum 20 characters!"),
+          .string()
+          .required("Username is required!")
+          .min(3, "Must be at least 3 characters!")
+          .max(20, "Must be maximum 20 characters!"),
       email: yup
-        .string()
-        .required("Email is required!")
-        .email("Email is invalid!")
-        .max(50, "Must be maximum 50 characters!"),
+          .string()
+          .required("Email is required!")
+          .email("Email is invalid!")
+          .max(50, "Must be maximum 50 characters!"),
       password: yup
-        .string()
-        .required("Password is required!")
-        .min(6, "Must be at least 6 characters!")
-        .max(40, "Must be maximum 40 characters!"),
+          .string()
+          .required("Password is required!")
+          .min(6, "Must be at least 6 characters!")
+          .max(40, "Must be maximum 40 characters!"),
     });
 
     return {
@@ -234,17 +234,17 @@ export default {
       this.message = "";
 
       this.$store.dispatch("auth/register", user).then(
-        (data) => {
-          console.log(data);
-        },
-        (error) => {
-          this.message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-        }
+          () => {
+            this.$router.push("/login");
+          },
+          (error) => {
+            this.message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+          }
       );
     },
   },
