@@ -7,7 +7,7 @@
         </h1>
       </div>
       <div class="bg-white rounded p-5 mt-6">
-        <Form @submit="handleCreate" class="w-full mt-5">
+        <Form class="w-full mt-5" @submit="handleCreate">
           <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
               <!--              <label-->
@@ -25,9 +25,9 @@
               <!--                Title-->
               <!--              </label>-->
               <Field
-                name="title"
-                :rules="isRequired"
-                class="
+                  id="grid-title"
+                  :rules="isRequired"
+                  class="
                   appearance-none
                   block
                   w-full
@@ -40,11 +40,11 @@
                   leading-tight
                   focus:outline-none focus:bg-white focus:border-gray-500
                 "
-                id="grid-title"
-                placeholder="Title"
-                type="text"
+                  name="title"
+                  placeholder="Title"
+                  type="text"
               ></Field>
-              <ErrorMessage class="text-red-500" name="title" />
+              <ErrorMessage class="text-red-500" name="title"/>
             </div>
           </div>
           <div class="flex flex-wrap -mx-3 mb-6">
@@ -65,10 +65,10 @@
                 <!--                </label>-->
               </div>
               <Field
-                as="textarea"
-                name="description"
-                id="grid-description"
-                class="
+                  id="grid-description"
+                  :rules="isRequired"
+                  as="textarea"
+                  class="
                   form-textarea
                   appearance-none
                   block
@@ -82,23 +82,23 @@
                   leading-tight
                   focus:outline-none focus:bg-white focus:border-gray-500
                 "
-                rows="5"
-                placeholder="Description."
-                :rules="isRequired"
+                  name="description"
+                  placeholder="Description."
+                  rows="5"
               ></Field>
-              <ErrorMessage class="text-red-500" name="description" />
+              <ErrorMessage class="text-red-500" name="description"/>
             </div>
           </div>
           <div class="mb-6">
             <prism-editor
-              v-model="code"
-              class="my-editor overflow-auto h-96"
-              :highlight="highlighter"
-              line-numbers
+                v-model="code"
+                :highlight="highlighter"
+                class="my-editor overflow-auto h-96"
+                line-numbers
             >
             </prism-editor>
 
-            <ErrorMessage class="text-red-500" name="code" />
+            <ErrorMessage class="text-red-500" name="code"/>
           </div>
           <div class="flex flex-wrap -mx-3">
             <div class="w-full px-3">
@@ -119,26 +119,26 @@
 
               <div id="grid-tags" class="tag-input">
                 <div
-                  v-for="(tag, index) in tags"
-                  :key="tag"
-                  class="tag-input__tag"
+                    v-for="(tag, index) in tags"
+                    :key="tag"
+                    class="tag-input__tag"
                 >
                   <span @click="removeTag(index)">x</span>
                   {{ tag }}
                 </div>
                 <input
-                  name="tags"
-                  type="text"
-                  placeholder="Enter a tag"
-                  class="tag-input__text"
-                  @keyup.enter="addTag"
-                  @keyup.space="addTag"
+                    class="tag-input__text"
+                    name="tags"
+                    placeholder="Enter a tag"
+                    type="text"
+                    @keyup.enter="addTag"
+                    @keyup.space="addTag"
                 />
               </div>
             </div>
           </div>
           <button
-            class="
+              class="
               bg-green-500
               hover:bg-green-700
               text-white
@@ -158,13 +158,13 @@
 </template>
 
 <script>
-import { Form, Field, ErrorMessage } from "vee-validate";
-import { PrismEditor } from "vue-prism-editor";
+import {Form, Field, ErrorMessage} from "vee-validate";
+import {PrismEditor} from "vue-prism-editor";
 import "vue-prism-editor/dist/prismeditor.min.css";
 import SnippetService from "../services/snippet.service";
 
 // import highlighting library (you can use any library you want just return html string)
-import { highlight, languages } from "prismjs/components/prism-core";
+import {highlight, languages} from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-python";
@@ -203,15 +203,15 @@ export default {
         code: this.code,
         tags: this.tags,
       };
-      const snippet = JSON.parse(JSON.stringify({ ...formData, ...data }));
+      const snippet = JSON.parse(JSON.stringify({...formData, ...data}));
 
       SnippetService.createSnippet(snippet).then(
-        (response) => {
-          console.log(response.data);
-        },
-        (error) => {
-          console.log(error);
-        }
+          () => {
+            this.$router.push("/")
+          },
+          (error) => {
+            console.log(error);
+          }
       );
     },
 
