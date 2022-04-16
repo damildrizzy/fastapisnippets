@@ -4,7 +4,7 @@
       Top Authors
     </h1>
     <div
-      class="
+        class="
         flex flex-col
         max-w-sm
         px-6
@@ -17,22 +17,22 @@
     >
       <ul class="-mx-4 space-y-6">
         <li
-          v-for="author in authors"
-          :key="author.id"
-          class="flex items-center"
+            v-for="author in authors"
+            :key="author.id"
+            class="flex items-center"
         >
           <img
-            src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-            alt="avatar"
-            class="object-cover w-10 h-10 mx-4 rounded-full"
+              alt="avatar"
+              class="object-cover w-10 h-10 mx-4 rounded-full"
+              src="https://gravatar.com/avatar/dfdceb5f7107bfde6687669026491b89?s=400&d=robohash&r=x"
           />
           <p>
-            <a href="#" class="mx-1 font-bold text-gray-700 hover:underline">{{
-              author.full_name
-            }}</a
+            <a class="mx-1 font-bold text-gray-700 hover:underline" href="#">{{
+                author.full_name
+              }}</a
             ><span class="text-sm font-light text-gray-700"
-              >{{ author.count }} Snippets Posted</span
-            >
+          >{{ author.count }} Snippets Posted</span
+          >
           </p>
         </li>
       </ul>
@@ -43,6 +43,7 @@
 
 <script>
 import SnippetService from "../services/snippet.service";
+
 export default {
   name: "TopAuthors",
   data() {
@@ -53,17 +54,17 @@ export default {
   },
   mounted() {
     SnippetService.getTopAuthors().then(
-      (response) => {
-        this.authors = response.data;
-      },
-      (error) => {
-        this.content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
+        (response) => {
+          this.authors = response.data;
+        },
+        (error) => {
+          this.content =
+              (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+              error.message ||
+              error.toString();
+        }
     );
   },
 };
