@@ -2,31 +2,31 @@
   <div class="flex items-center justify-between">
     <h1 class="text-xl font-bold text-gray-700 md:text-2xl">All Snippets</h1>
     <div>
-      <select
-          class="
-          inline-flex
-          justify-center
-          w-full
-          rounded-md
-          border border-gray-300
-          shadow-sm
-          px-4
-          py-2
-          bg-white
-          text-sm
-          font-medium
-          text-gray-700
-          hover:bg-gray-50
-          focus:outline-none
-          focus:ring-2
-          focus:ring-offset-2
-          focus:ring-offset-gray-100
-          focus:ring-indigo-500
-        "
-      >
-        <option>Latest</option>
-        <option>Highest Rated</option>
-      </select>
+      <!--      <select-->
+      <!--          class="-->
+      <!--          inline-flex-->
+      <!--          justify-center-->
+      <!--          w-full-->
+      <!--          rounded-md-->
+      <!--          border border-gray-300-->
+      <!--          shadow-sm-->
+      <!--          px-4-->
+      <!--          py-2-->
+      <!--          bg-white-->
+      <!--          text-sm-->
+      <!--          font-medium-->
+      <!--          text-gray-700-->
+      <!--          hover:bg-gray-50-->
+      <!--          focus:outline-none-->
+      <!--          focus:ring-2-->
+      <!--          focus:ring-offset-2-->
+      <!--          focus:ring-offset-gray-100-->
+      <!--          focus:ring-indigo-500-->
+      <!--        "-->
+      <!--      >-->
+      <!--        <option>Latest</option>-->
+      <!--        <option>Highest Rated</option>-->
+      <!--      </select>-->
     </div>
   </div>
   <div v-for="snippet in snippets" :key="snippet.id" class="mt-6">
