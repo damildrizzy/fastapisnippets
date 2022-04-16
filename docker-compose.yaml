@@ -36,6 +36,8 @@ services:
          - POSTGRES_USER=user
          - POSTGRES_PASSWORD=notasafepassword
          - POSTGRES_DB=snippets_db
+        volumes:
+            - app-db-data:/var/lib/postgresql/data/pgdata
 
     pgadmin:
         image: dpage/pgadmin4
@@ -46,6 +48,9 @@ services:
         - "5050:80"
         depends_on:
         - db
+
+volumes:
+    app-db-data:
     
     
 
