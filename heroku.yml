@@ -1,0 +1,10 @@
+setup:
+  addons:
+  - plan: heroku-postgresql
+    as: DATABASE
+  config:
+    env_file: .env
+build:
+  docker:
+    server: ./server/Dockerfile
+    client: ./client/Dockerfile
