@@ -6,5 +6,7 @@ setup:
     env_file: .env
 build:
   docker:
-    server: ./server/Dockerfile
-    client: ./client/Dockerfile
+    web: ./client/Dockerfile
+    api: ./server/Dockerfile
+run:
+  api: /start-reload.sh
