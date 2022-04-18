@@ -1,8 +1,9 @@
 <template>
-  <div class="flex items-center justify-between">
+  <div>
+    <div class="flex items-center justify-between">
     <h1 class="text-xl font-bold text-gray-700 md:text-2xl">All Snippets</h1>
   </div>
-  <div v-for="snippet in snippets" :key="snippet.id" class="mt-6" v-bind="$attrs">
+  <div v-for="snippet in snippets" :key="snippet.id" class="mt-6">
     <div class="max-w-4xl px-5 py-1 mx-auto bg-white shadow-md">
       <div class="mt-2">
         <a class="text-2xl font-bold text-gray-700 hover:underline" href="#">{{
@@ -32,6 +33,8 @@
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 <script>
