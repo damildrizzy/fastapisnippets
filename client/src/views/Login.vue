@@ -1,6 +1,6 @@
 <template>
   <div
-      class="
+    class="
       h-screen
       bg-gray-700
       flex flex-col
@@ -10,8 +10,8 @@
     "
   >
     <div
-        v-if="message"
-        class="
+      v-if="message"
+      class="
         bg-red-100
         border border-red-400
         text-red-700
@@ -19,7 +19,7 @@
         rounded
         relative
       "
-        role="alert"
+      role="alert"
     >
       <strong class="font-bold">Error! </strong>
       <span class="block sm:inline">{{ message }}</span>
@@ -29,31 +29,31 @@
       <p class="text-sm">Sign in with your email or username</p>
 
       <Form
-          :validation-schema="schema"
-          class="space-y-5 mt-5"
-          @submit="handleLogin"
+        :validation-schema="schema"
+        class="space-y-5 mt-5"
+        @submit="handleLogin"
       >
         <div>
           <Field
-              class="w-full h-12 border border-gray-800 rounded px-3"
-              name="identifier"
-              placeholder="Email Address or Username"
-              type="text"
+            class="w-full h-12 border border-gray-800 rounded px-3"
+            name="identifier"
+            placeholder="Email Address or Username"
+            type="text"
           />
-          <ErrorMessage class="text-red-400 float-left mb-2" name="email"/>
+          <ErrorMessage class="text-red-400 float-left mb-2" name="email" />
         </div>
         <div>
           <Field
-              class="w-full h-12 border border-gray-800 rounded px-3"
-              name="password"
-              placeholder="password"
-              type="password"
+            class="w-full h-12 border border-gray-800 rounded px-3"
+            name="password"
+            placeholder="password"
+            type="password"
           />
-          <ErrorMessage class="text-red-400 float-left mb-2" name="password"/>
+          <ErrorMessage class="text-red-400 float-left mb-2" name="password" />
         </div>
 
         <button
-            class="
+          class="
             text-center
             w-full
             bg-green-700
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import {Form, Field, ErrorMessage} from "vee-validate";
+import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default {
@@ -92,8 +92,8 @@ export default {
   data() {
     const schema = yup.object().shape({
       identifier: yup
-          .string()
-          .required("An email address or username is required"),
+        .string()
+        .required("An email address or username is required"),
       password: yup.string().min(6).required("password is required"),
     });
     return {
@@ -106,20 +106,20 @@ export default {
       this.message = "";
 
       this.$store.dispatch("auth/login", user).then(
-          () => {
-            if (this.$route.query.redirect)
-              this.$router.push(this.$route.query.redirect);
-            else this.$router.push("/");
-          },
-          (error) => {
-            console.log(error.response.data.detail);
-            this.message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.detail) ||
-                error.message ||
-                error.toString();
-          }
+        () => {
+          if (this.$route.query.redirect)
+            this.$router.push(this.$route.query.redirect);
+          else this.$router.push("/");
+        },
+        (error) => {
+          console.log(error.response.data.detail);
+          this.message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString();
+        }
       );
     },
   },
