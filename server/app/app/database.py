@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from decouple import config
 
-SQLALCHEMY_DATABASE_URL = config("DATABASE_URL")
+SQLALCHEMY_DATABASE_URL = config("DATABASE_URL").replace("://", "ql://", 1)
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
