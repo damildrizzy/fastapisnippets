@@ -7,6 +7,8 @@ RUN apk add --update python3 make g++\
    && rm -rf /var/cache/apk/*
 RUN npm install
 COPY . .
+ARG VUE_APP_API_BASE_URL
+ENV VUE_APP_API_BASE_URL $VUE_APP_API_BASE_URL
 RUN npm run build
 
 # production environment
