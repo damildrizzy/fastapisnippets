@@ -18,17 +18,20 @@
           >
             Create Snippet
           </router-link>
-          <router-link
-              class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4"
-              to="/login"
-          >
-            Login
-          </router-link>
-          <router-link
-              class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4"
-              to="/register"
-          >Register
-          </router-link>
+          <div v-if="!loggedIn">
+            <router-link
+                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4"
+                to="/login"
+            >
+              Login
+            </router-link>
+            <router-link
+                class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 mr-4"
+                to="/register"
+            >Register
+            </router-link>
+          </div>
+
         </div>
       </div>
     </div>
@@ -38,5 +41,10 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      loggedIn: this.$store.state.auth.status.loggedIn
+    }
+  }
 };
 </script>
