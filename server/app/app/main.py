@@ -8,7 +8,10 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = ["*"]
+origins = [
+    "http://localhost:8081",
+    "https://fastapisnippets.herokuapp.com"
+]
 
 app.add_middleware(
     CORSMiddleware,
