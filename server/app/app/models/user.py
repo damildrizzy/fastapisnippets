@@ -1,5 +1,5 @@
 from app.database import Base
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, Boolean
 from sqlalchemy.orm import relationship
 
 
@@ -12,3 +12,4 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     snippets = relationship("Snippet", back_populates="author")
+    is_admin = Column(Boolean, default=False)
